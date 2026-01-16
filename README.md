@@ -1,33 +1,81 @@
-- [] 1. "미션 목표"
+# 🚀 Express & TypeScript 마이그레이션 프로젝트
 
-  - [x] 1-1. 타입스크립트 마이그레이션하기
-  - [x] 1-2. 타입스크립트 개발 환경 세팅하기
-  - [] 1-3. (심화) Layered Architecture 적용하기
+> **Sprint Mission 5**: 기존 JavaScript 프로젝트를 TypeScript로 마이그레이션하고, **Layered Architecture**를 적용하여 코드 유지보수성을 극대화한 프로젝트입니다.
 
-- [x] 2. "기본 요구 사항"
+---
 
-  - [x] 2-1. 스프린트 미션 4의 구현이 완료된 상태에서 진행을 권장합니다.
-  - [x] 2-2. 타입스크립트 마이그레이션을 먼저 진행해 보고, 이전 미션에서 구현하지 못한 부분이 있다면 추가로 구현해 보세요.
+## 🎯 미션 목표
 
-- [x] 3. "프로젝트 세팅"
+### ✅ 1-1. 타입스크립트 마이그레이션
+* 전체 소스 코드를 `.js`에서 `.ts`로 전환 완료
 
-  - [x] 3-1. tsconfig.json 파일을 생성하고, 필요한 옵션을 설정해 주세요. (예: outDir).
-  - [x] 3-2. 필요한 npm script를 설정해 주세요.
+### ✅ 1-2. 개발 환경 세팅
+* `tsconfig.json` 및 개발 서버 환경 구축 완료
 
-- [x] 4. "타입스크립트 마이그레이션"
+### 🔥 1-3. Layered Architecture (심화)
+* **Controller-Service-Repository** 패턴 적용으로 관심사 분리 완료
+* **DTO** 계층 사이에서 데이터를 주고 받을 때 활용
+---
 
-  - [x] 4-1. 기존 Express.js 프로젝트를 타입스크립트 프로젝트로 마이그레이션 해주세요.
-  - [x] 4-2. 필요한 타입 패키지를 설치해 주세요.
-  - [x] 4-3. any 타입의 사용은 최소화해주세요.
-  - [x] 4-4. 복잡한 객체 구조나 배열 구조를 가진 변수에 인터페이스 또는 타입 별칭을 사용하세요.
-  - [x] 4-5. 필요한 경우, 타입 별칭 또는 유틸리티 타입을 사용해 타입 복잡성을 줄여주세요.
-  - [x] 4-6. 필요한 경우, declare를 사용하여 타입을 오버라이드하거나 확장합니다. (예: req.user)
+## 🛠️ 기술 스택 (Tech Stack)
 
-- [x] 5. "개발 환경 설정"
+### **Languages & Runtime**
+* TypeScript
+* ES Modules 기반 런타임 환경
 
-  - [x] 5-1. ts-node 를 사용해 .ts 코드를 바로 실행할 수 있는 npm script를 만들어 주세요. (예: npm run dev)
-  - [x] 5-2. nodemon을 사용해 .ts 코드가 변경될 때마다 서버가 다시 실행되는 npm script를 만들어 주세요. => npm run dev
+### **Backend Framework & Library**
+* **Express**
+* **Multer**: 파일 업로드 및 이미지 서버 구축
 
-- [] 6. 심화 요구 사항 - " Layered Architecture 적용하기 "
-  - [] 6-1. Controller, Service, Repository로 나누어 코드를 리팩토링해 주세요.
-  - [] 6-2. 필요하다면, 계층 사이에서 데이터를 주고 받을 때 DTO를 활용해 주세요.
+### **Database & Security**
+* Prisma
+* PostgreSQL
+* **JWT (jsonwebtoken)**: 사용자 인증 및 권한 관리
+* **Bcrypt**: 비밀번호 암호화 저장
+
+---
+
+## ⚙️ 프로젝트 세팅 및 개발 환경
+
+### **TypeScript 설정**
+* `tsconfig.json` 파일을 통해 컴파일 옵션 및 출력 디렉토리(`outDir: ./build`) 설정 완료
+
+### **실행 스크립트 (package.json)**
+* `npm run dev`: `nodemon`과 `tsx`를 활용한 실시간 반영 개발 서버 실행
+* `npm run build`: 운영 환경 배포를 위한 `tsc` 빌드 프로세스 구축
+* `npm run seed`: `prisma`를 활용한 초기 데이터 시딩 작업
+
+---
+
+## 🏗️ 아키텍처 및 마이그레이션 상세
+
+
+
+### **📦 Layered Architecture 적용**
+* **Controller**: HTTP 요청 처리 및 클라이언트 응답 반환
+* **Service**: 핵심 비즈니스 로직 처리 및 데이터 유효성 검증 수행
+* **Repository**: Prisma를 활용한 데이터베이스 직접 접근 (Data Access)
+* **DTO**: 계층 간 안전한 데이터 전달을 위한 객체 구조(Superstruct) 정의
+
+### **🛡️ 타입 안전성 확보**
+* `any` 타입 사용을 최소화하고 인터페이스(`interface`) 및 타입 별칭 활용
+* `declare`를 활용하여 Express의 `Request` 객체 확장 (예: `req.user`, `req.file`)
+* 복잡한 객체 및 배열 구조에 유틸리티 타입을 적용하여 타입 복잡도 관리
+
+---
+
+## 📋 진행 현황 체크리스트
+
+- [x] **마이그레이션**: TypeScript 전환 및 필요한 타입 패키지(@types) 설치
+- [x] **환경 설정**: `tsx`, `nodemon`을 활용한 편리한 개발 서버 환경 구성
+- [x] **심화 과제**: Controller-Service-Repository 계층 분리 및 DTO 활용
+
+---
+
+## 💡 실행 방법
+
+### **의존성 설치**
+npm install
+
+### **개발 서버 실행**
+npm run dev
